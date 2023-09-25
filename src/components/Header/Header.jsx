@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png"
 
 const Header = () => {
+    
+    
     return (
         <div>
             <div className="navbar bg-base-100 max-w-6xl mx-auto mt-8 ">
@@ -9,7 +11,7 @@ const Header = () => {
                     {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
                     <img className="w-52 z-20" src={logo} alt="" />
                 </div>
-                <div className="navbar-end flex">
+                <div className="navbar-end flex text-red">
                     <ul className="menu menu-horizontal px-1 z-20">
                         <li> <NavLink to="/">Home</NavLink></li>
                         <li> <NavLink to="/donation">Donation</NavLink></li>
