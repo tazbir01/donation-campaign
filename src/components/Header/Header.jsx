@@ -16,7 +16,6 @@ const Header = () => {
                         <li> <NavLink to="/statistics">Statistics</NavLink></li>
                     </ul>
                 </div>
-                
             </div>
         </div>
     );
