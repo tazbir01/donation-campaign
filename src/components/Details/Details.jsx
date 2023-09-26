@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {saveDonationData} from '../Utility/LocalStorage'
 
 
 const Details = () => {
@@ -12,7 +13,10 @@ const Details = () => {
     const donation = donations.find(donation => donation.id === idInt)
     console.log(donation)
 
-    const notify =()=> toast('You Have Donated Successfully')
+    const notify =()=> {
+        toast('You Have Donated Successfully')
+        saveDonationData(idInt)
+    }
 
     return (
         <div className="max-w-6xl mx-auto my-20 ">

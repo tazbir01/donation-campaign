@@ -6,7 +6,7 @@ const DonationCard = ({ donation }) => {
     console.log(donation)
     return (
         <div>
-            <NavLink to={`/details/${id}`}>
+            <NavLink to={`/donation-details/${id}`}>
                 <div className="rounded-lg" style={{ backgroundColor: card_background_color }}>
                     <img src={img1} alt="" />
                     <div className="p-4">
