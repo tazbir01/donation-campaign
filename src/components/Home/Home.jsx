@@ -19,7 +19,7 @@ const Home = () => {
                     <div className="hero-overlay bg-white bg-opacity-90"></div>
                     <div className="hero-content text-center text-neutral-content ">
                         <div className="">
-                            <h1 className="mb-5 text-3xl md:text-5xl text-black font-bold z-20">I Grow By Helping People In Need</h1>
+                            <h1 className="mb-5 md:mt-10 text-3xl md:text-5xl text-black font-bold z-20">I Grow By Helping People In Need</h1>
                             <div className="flex justify-center mt-10">
                                 <input className="border md:w-80 px-4 py-2 rounded-l-lg" placeholder="Search Here..." type="text" />
                                 <button className="bg-red-500 text-white px-5 rounded-r-lg">Search</button>

@@ -3,14 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { PieChart, Pie, Cell, } from 'recharts';
 
-const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-
-];
-
 const COLORS = ['#FF444A', '#00C49F'];
-
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -28,24 +21,47 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const Statistics = () => {
     const donations = useLoaderData()
-    const [donation, setDonation] = useState([])
+    const [dataInParcent, setDataInParcent] = useState([])
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('donations'))
-        // console.log(storedData)
 
-        const donated = donations.filter(item => storedData.includes(item.id))
-        console.log(donated)
-        setDonation(donated)
-        console.log(donation)
-    }, [])
+        if (!storedData || storedData.length === 0) {
+            const data1 = [
+                { name: "remaining", value: 100 },
+                { name: "donated", value: 0 }
+            ]
+            setDataInParcent(data1)
+        } else {
+            const donationPrice = donations.map(item => item.price)
+            const totalDonationPrice = donationPrice.reduce((x, y) => x + y, 0)
+            console.log(totalDonationPrice)
+            const donated = donations.filter(item => storedData.includes(item.id))
+
+            const donatedPrice = donated.map(item => item.price)
+            const totalDonatedPrice = donatedPrice.reduce((x, y) => x + y, 0)
+
+            const donatedPriceInParcent = (totalDonatedPrice * 100) / totalDonationPrice;
+            const totaldonationInParcent = 100 - donatedPriceInParcent;
+
+            console.log(donatedPriceInParcent)
+            console.log(totaldonationInParcent)
+            const data = [
+                { name: "remaining", value: totaldonationInParcent },
+                { name: "donated", value: donatedPriceInParcent }
+            ]
+
+            setDataInParcent(data)
+        }
+
+    }, [donations])
     return (
         <div className='flex flex-col justify-center items-center'>
 
 
             <PieChart width={400} height={400}>
                 <Pie
-                    data={data}
+                    data={dataInParcent}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
@@ -54,7 +70,7 @@ const Statistics = () => {
                     fill="#8884d8"
                     dataKey="value"
                 >
-                    {data.map((entry, index) => (
+                    {dataInParcent.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>

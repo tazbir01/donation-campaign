@@ -7,10 +7,10 @@ const Header = () => {
     return (
         <div>
             <div className="md:navbar bg-base-100 max-w-6xl mx-auto mt-8 ">
-                <div className="navbar-start">
+                <div className="md:navbar-start flex justify-center">
                     <img className="w-52 z-20" src={logo} alt="" />
                 </div>
-                <div className=" navbar-end flex text-red">
+                <div className=" md:navbar-end flex justify-center mb-8 text-red">
                     <ul className="menu menu-horizontal px-1 z-20">
                         <li className="font-medium"> <NavLink to="/" className={({ isActive , isPending}) =>
                             isActive
