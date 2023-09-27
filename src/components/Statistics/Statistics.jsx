@@ -1,12 +1,7 @@
 // import React, { PureComponent } from 'react';
+import { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { PieChart, Pie, Cell, } from 'recharts';
-
-
-
-const storedData = JSON.parse(localStorage.getItem('donations'))
-console.log(storedData)
-
-storedData.map(item => console.log(item))
 
 const data = [
     { name: 'Group A', value: 400 },
@@ -32,10 +27,22 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 
 const Statistics = () => {
+    const donations = useLoaderData()
+    const [donation, setDonation] = useState([])
+
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('donations'))
+        // console.log(storedData)
+
+        const donated = donations.filter(item => storedData.includes(item.id))
+        console.log(donated)
+        setDonation(donated)
+        console.log(donation)
+    }, [])
     return (
         <div className='flex flex-col justify-center items-center'>
-            
-           
+
+
             <PieChart width={400} height={400}>
                 <Pie
                     data={data}
